@@ -3,9 +3,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from pyts.approximation import DiscreteFourierTransform
 
-
-def statify_by_label(X, )
-
 def get_dft_coefs(X, n_coefs):
     """
     :param X: the training set  numpy array shape:[n_samples, n_time_steps]
@@ -43,6 +40,7 @@ def plot_dft(X, X_irfft):
     plt.show()
 
 def data_aug_by_dft():
+
 
 
 if __name__ == '__main__':
