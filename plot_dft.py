@@ -42,7 +42,7 @@ def plot_dft(X, X_irfft):
     plt.title('Discrete Fourier Transform', fontsize=16)
     plt.show()
 
-def data_aug_by_dft()
+def data_aug_by_dft():
 
 
 if __name__ == '__main__':
