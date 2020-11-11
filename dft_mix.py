@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from pyts.approximation import DiscreteFourierTransform
+from utils import load_ucr, stratify_by_label
 
 def get_dft_coefs(X, n_coefs):
     """
@@ -12,6 +13,7 @@ def get_dft_coefs(X, n_coefs):
     dft = DiscreteFourierTransform(n_coefs=n_coefs, norm_mean=False,
                                    norm_std=False)
     X_dft = dft.fit_transform(X)
+    n_samples = len(X)
     if n_coefs % 2 == 0:
         real_idx = np.arange(1, n_coefs, 2)
         imag_idx = np.arange(2, n_coefs, 2)
@@ -39,31 +41,23 @@ def plot_dft(X, X_irfft):
     plt.title('Discrete Fourier Transform', fontsize=16)
     plt.show()
 
-def data_aug_by_dft():
 
+def data_aug_by_dft(stratified_data, spilt_ratio, n_group):
+    for i in range(stratified_data.shape[0]):
+        data = stratified_data[i]
+        X = data[:, 1:]
+        n_time_setps = len(X[0])
+        n_coefs = int(n_time_setps * spilt_ratio)
+        X_dft = get_dft_coefs(X, n_coefs)
+        print(X_dft.shape)
 
 
 if __name__ == '__main__':
-    data_path = '85_UCRArchive/ECG200/ECG200_'
-    trainset_path = data_path + 'TRAIN.tsv'
-    trainset = pd.read_csv(trainset_path, sep='\t')
-    X = np.array(trainset)[:, 1:]
-    Y = np.array(trainset)[:, 0]
-    print(Y)
-    n_samples = X.shape[0]
-    n_timestamps = X.shape[1]
-    n_coefs = 10
+    data_path = '85_UCRArchive/ECG200/ECG200_TRAIN.tsv'
+    data = load_ucr(data_path)
+    stratified_data, n_class = stratify_by_label(data)
+    data_aug_by_dft(stratified_data, 0.20)
 
-    X_dft_new = get_dft_coefs(X, n_coefs)
-    print(X_dft_new.shape)
-    X_dft_1 = X_dft_new[1]
-
-    X_dft_2 = X_dft_new[2]
-    X_dft_12 = np.concatenate((X_dft_1[:8], X_dft_2[7:]))
-    print(X_dft_12)
-    X_irfft1 = np.fft.irfft(X_dft_12, n_timestamps)
-    plot_dft(X[1], X_irfft1)
-    #
     # n_samples, n_timestamps = 1, 48
     #
     # # Toy dataset
@@ -83,5 +77,3 @@ if __name__ == '__main__':
     # X_irfft = np.fft.irfft(X_dft_new[:,5:10], n_timestamps)
     # # Show the results for the first time series
     # plot_dft(X, X_irfft)
-
-
