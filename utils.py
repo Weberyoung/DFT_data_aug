@@ -1,6 +1,8 @@
 import pandas as pd
-import numpy as np
 from sklearn import preprocessing
+import torch
+import numpy as np
+from torch.utils.data import Dataset
 
 
 def load_ucr(path):
@@ -13,7 +15,55 @@ def load_ucr(path):
     return data  # all labels are transformed to [0 - n_classes-1]
 
 
+class UcrDataset(Dataset):
+    def __init__(self, data, channel_last=True):
+        '''
+         实现初始化方法，在初始化的时候将数据读载入
+        :param data_path: 文件路径
+        :param channel_last: 数据维度是否在最后一维
+        '''
+        self.data = data
+        self.channel_last = channel_last
+        if self.channel_last:
+            self.data = np.reshape(self.data, [self.data.shape[0], self.data.shape[1], 1])
+        else:
+            self.data = np.reshape(self.data, [self.data.shape[0], 1, self.data.shape[1]])
+
+    def __len__(self):
+        '''
+        返回data的长度
+        '''
+        return len(self.data)
+
+    def __getitem__(self, idx):
+        '''
+        根据 idx 返回一行数据
+        UCR数据库的数据集类标在第一列，分别返回数据和类标
+        '''
+        if not self.channel_last:
+            return self.data[idx, :, 1:], self.data[idx, :, 0]
+        else:
+            return self.data[idx, 1:, :], self.data[idx, 0, :]
+
+    def get_seq_len(self):
+        if self.channel_last:
+            return self.data.shape[1] - 1
+        else:
+            return self.data.shape[2] - 1
+
+
+def UCR_dataloader(dataset, batch_size):
+    data_loader = torch.utils.data.DataLoader(dataset, batch_size=batch_size,
+                                              shuffle=False, num_workers=0, drop_last=False)
+
+    return data_loader
+
+
 def stratify_by_label(dataset):
+    """
+    :param dataset: the data
+    :return: the stratified data by the label
+    """
     # Make all the same label data cluster
     labels = dataset[:, 0]
     order_indices = np.argsort(labels)
@@ -35,7 +85,12 @@ def stratify_by_label(dataset):
 
 if __name__ == '__main__':
     data = load_ucr('85_UCRArchive/ECG200/ECG200_TRAIN.tsv')
-    stratified_data, n_class = stratify_by_label(data)
-    assert (stratified_data.shape[0] == n_class)
-    for i in range(n_class):
-        print(stratified_data[i])
+    dataset = UcrDataset(data)
+    dataloader = UCR_dataloader(dataset, batch_size=64)
+    for i, (data, label) in enumerate(dataloader):
+        print(data.size())
+        print(label)
+    # stratified_data, n_class = stratify_by_label(data)
+    # assert (stratified_data.shape[0] == n_class)
+    # for i in range(n_class):
+    #     print(stratified_data[i])
