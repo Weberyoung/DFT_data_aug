@@ -9,10 +9,11 @@ def load_ucr(path):
     data = pd.read_csv(path, sep='\t', header=None)
     data = np.array(data)  # read the data
     le = preprocessing.LabelEncoder()  # employ the labelEncoder
-    ori_lable = data[:, 0]
-    normal_lable = le.fit_transform(ori_lable)
-    data[:, 0] = normal_lable
-    return data  # all labels are transformed to [0 - n_classes-1]
+    ori_label = data[:, 0]
+    n_class = len(np.unique(ori_label))
+    normal_label = le.fit_transform(ori_label)
+    data[:, 0] = normal_label
+    return data, n_class  # all labels are transformed to [0 - n_classes-1]
 
 
 class UcrDataset(Dataset):
@@ -54,7 +55,7 @@ class UcrDataset(Dataset):
 
 def UCR_dataloader(dataset, batch_size):
     data_loader = torch.utils.data.DataLoader(dataset, batch_size=batch_size,
-                                              shuffle=False, num_workers=0, drop_last=False)
+                                              shuffle=True, num_workers=0, drop_last=False)
 
     return data_loader
 
@@ -80,16 +81,15 @@ def stratify_by_label(dataset):
         spilt_points += (labels == i).sum()
     stratified_data = np.array(stratified_data)
 
-    return stratified_data, n_classes
+    return stratified_data
 
 
 if __name__ == '__main__':
-    data = load_ucr('85_UCRArchive/ECG200/ECG200_TRAIN.tsv')
+    data, n_class = load_ucr('85_UCRArchive/ECG200/ECG200_TRAIN.tsv')
     dataset = UcrDataset(data)
     dataloader = UCR_dataloader(dataset, batch_size=64)
     for i, (data, label) in enumerate(dataloader):
         print(data.size())
-        print(label)
     # stratified_data, n_class = stratify_by_label(data)
     # assert (stratified_data.shape[0] == n_class)
     # for i in range(n_class):

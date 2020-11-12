@@ -1,7 +1,8 @@
 from models import ResNet, ConvNet
 import torch.nn as nn
 import argparse
-from utils import UcrDataset, UCR_dataloader
+from utils import UcrDataset, UCR_dataloader, load_ucr, stratify_by_label
+from dft_aug import data_aug_by_dft
 import torch.optim as optim
 import torch.utils.data
 import os
@@ -11,11 +12,12 @@ import numpy as np
 parser = argparse.ArgumentParser()
 
 parser.add_argument('--test', action='store_true', help='')
+parser.add_argument('--aug', action='store_true', help='')
 parser.add_argument('--query_one', action='store_true', help='query the probability of  target idx sample')
 parser.add_argument('--idx', type=int, help='the index of test sample ')
 parser.add_argument('--gpu', type=str, default='0', help='the index of test sample ')
 parser.add_argument('--channel_last', type=bool, default=True, help='the channel of data is last or not')
-parser.add_argument('--n_class', type=int, default=2, help='the class number of dataset')
+# parser.add_argument('--n_class', type=int, default=2, help='the class number of dataset')
 parser.add_argument('--epochs', type=int, default=1500, help='number of epochs to train for')
 parser.add_argument('--e', default=1499, help='number of epochs to train for')
 parser.add_argument('--lr', type=float, default=0.0001, help='learning rate, default=0.0002')
@@ -23,8 +25,11 @@ parser.add_argument('--cuda', action='store_true', help='enables cuda')
 parser.add_argument('--checkpoints_folder', default='model_checkpoints', help='folder to save checkpoints')
 parser.add_argument('--manualSeed', type=int, help='manual seed')
 parser.add_argument('--run_tag', default='ECG200', help='tags for the current run')
-parser.add_argument('--model', default='', help='the model type(ResNet,FCN)')
+parser.add_argument('--model', default='f', help='the model type(ResNet,FCN)')
 parser.add_argument('--checkpoint_every', default=5, help='number of epochs after which saving checkpoints')
+parser.add_argument('--ratio', type=float, default=0.4, help='the split ratio')
+parser.add_argument('--n_group', type=int, default=4, help='the number of group')
+
 opt = parser.parse_args()
 
 print(opt)
@@ -42,23 +47,33 @@ random.seed(opt.manualSeed)
 torch.manual_seed(opt.manualSeed)
 
 
-def train():
+def train(data_aug=opt.aug):
     # mkdirs for checkpoints output
     os.makedirs(opt.checkpoints_folder, exist_ok=True)
     os.makedirs('%s/%s' % (opt.checkpoints_folder, opt.run_tag), exist_ok=True)
 
     # 加载数据集 #
-    dataset_path = '85_UCRArchive/' + opt.run_tag + '/' + opt.run_tag + '_TRAIN.tsv'
-    dataset = UcrDataset(dataset_path, channel_last=opt.channel_last)
+    path = '85_UCRArchive/' + opt.run_tag + '/' + opt.run_tag + '_TRAIN.tsv'
+    train_set, n_class = load_ucr(path)
+
+    if data_aug:
+        print('启用数据增强！')
+        stratified_train_set = stratify_by_label(train_set)
+        data_aug_set = data_aug_by_dft(stratified_train_set, opt.ratio, opt.n_group)
+        total_set = np.concatenate((train_set, data_aug_set))
+        print('Shape of total set', total_set.shape)
+        dataset = UcrDataset(total_set, channel_last=opt.channel_last)
+    else:
+        dataset = UcrDataset(train_set, channel_last=opt.channel_last)
 
     batch_size = int(min(len(dataset) / 10, 16))
     print('dataset length: ', len(dataset))
-    print('batch的大小：', batch_size)
+    print('batch size：', batch_size)
     dataloader = UCR_dataloader(dataset, batch_size)
 
     # Common behavior
     seq_len = dataset.get_seq_len()  # 初始化序列长度
-    n_class = opt.n_class
+
     print('序列长度:', seq_len)
 
     # 创建分类器对象\损失函数\优化器
@@ -73,8 +88,6 @@ def train():
     print('############# Start to Train ###############')
     for epoch in range(opt.epochs):
         for i, (data, label) in enumerate(dataloader):
-            if data.size(0) != batch_size:
-                break
             data = data.float()
             data = data.to(device)
             label = label.long()
@@ -93,8 +106,9 @@ def train():
 
 
 def eval_accuracy(net):
-    data_path = '85_UCRArchive/' + opt.run_tag + '/' + opt.run_tag + '_TEST.tsv'
-    dataset = UcrDataset(data_path, channel_last=opt.channel_last)
+    path = '85_UCRArchive/' + opt.run_tag + '/' + opt.run_tag + '_TEST.tsv'
+    test_set, n_class = load_ucr(path)
+    dataset = UcrDataset(test_set, channel_last=opt.channel_last)
     batch_size = int(min(len(dataset) / 10, 16))
     dataloader = UCR_dataloader(dataset, batch_size)
     with torch.no_grad():
@@ -117,7 +131,7 @@ def eval_accuracy(net):
             pred_label = torch.argmax(prob, dim=1)  # 取概率最大的维度
             correct += (pred_label == label).sum().item()
 
-        print('The EVAL Accuracy of %s is :  %.2f %%' % (data_path, correct / total * 100))
+        print('The EVAL Accuracy of %s is :  %.2f %%' % (path, correct / total * 100))
     return correct / total * 100
 
 

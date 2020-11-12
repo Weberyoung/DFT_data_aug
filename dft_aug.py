@@ -82,7 +82,7 @@ def data_aug_by_dft(stratified_data, ratio, n_group):
         for j in range(n_group):
             split_data = split_X_dft[j]
             n_samples = split_data.shape[0]
-            N_selected = int(n_samples * 0.5)  # half of the original size
+            N_selected = int(n_samples * 1)  # half of the original size
             N_list = np.arange(n_samples)
 
             # start to sample
@@ -108,7 +108,8 @@ def data_aug_by_dft(stratified_data, ratio, n_group):
 
 if __name__ == '__main__':
     data_path = '85_UCRArchive/ECG200/ECG200_TRAIN.tsv'
-    data = load_ucr(data_path)
-    stratified_data, n_class = stratify_by_label(data)
-    data_aug_by_dft(stratified_data, 0.4, 4)
+    data,n_class = load_ucr(data_path)
+    stratified_data = stratify_by_label(data)
+    data_aug = data_aug_by_dft(stratified_data, 0.4, 4)
+    print(n_class)
 
