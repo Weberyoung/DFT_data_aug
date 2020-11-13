@@ -27,8 +27,8 @@ parser.add_argument('--manualSeed', type=int, help='manual seed')
 parser.add_argument('--run_tag', default='ECG200', help='tags for the current run')
 parser.add_argument('--model', default='f', help='the model type(ResNet,FCN)')
 parser.add_argument('--checkpoint_every', default=5, help='number of epochs after which saving checkpoints')
-parser.add_argument('--ratio', type=float, default=0.4, help='the split ratio')
-parser.add_argument('--n_group', type=int, default=4, help='the number of group')
+parser.add_argument('--ratio', type=float, default=20, help='the split ratio')
+parser.add_argument('--n_group', type=int, default=2, help='the number of group')
 
 opt = parser.parse_args()
 

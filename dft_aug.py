@@ -62,7 +62,7 @@ def data_aug_by_dft(stratified_data, ratio, n_group):
 
         # get the time steps and the number of coefficients
         n_time_steps = len(X[0])
-        n_coefs = int(n_time_steps * ratio)
+        n_coefs = ratio
 
         # discrete fourier transform
         X_dft = get_dft_coefs(X, n_coefs)
@@ -108,8 +108,8 @@ def data_aug_by_dft(stratified_data, ratio, n_group):
 
 if __name__ == '__main__':
     data_path = '85_UCRArchive/ECG200/ECG200_TRAIN.tsv'
-    data,n_class = load_ucr(data_path)
+    data, n_class = load_ucr(data_path)
     stratified_data = stratify_by_label(data)
-    data_aug = data_aug_by_dft(stratified_data, 0.4, 4)
-    print(n_class)
-
+    data_aug = data_aug_by_dft(stratified_data, 20, 4)
+    # print(n_class)
+    #
