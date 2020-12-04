@@ -7,7 +7,8 @@ from torch.utils.data import Dataset
 
 def load_ucr(path):
     data = pd.read_csv(path, sep='\t', header=None)
-    data = np.array(data)  # read the data
+    data = data.values
+    # data = np.array(data)  # read the data
     le = preprocessing.LabelEncoder()  # employ the labelEncoder
     ori_label = data[:, 0]
     n_class = len(np.unique(ori_label))
@@ -85,11 +86,8 @@ def stratify_by_label(dataset):
 
 
 if __name__ == '__main__':
-    data, n_class = load_ucr('85_UCRArchive/ECG200/ECG200_TRAIN.tsv')
-    dataset = UcrDataset(data)
-    dataloader = UCR_dataloader(dataset, batch_size=64)
-    for i, (data, label) in enumerate(dataloader):
-        print(data.size())
+    data, n_class = load_ucr('UCRArchive_2018/ECG200/ECG200_TRAIN.tsv')
+    print(len(data))
     # stratified_data, n_class = stratify_by_label(data)
     # assert (stratified_data.shape[0] == n_class)
     # for i in range(n_class):

@@ -1,85 +1,92 @@
-nohup python train_resNet.py --run_tag FiftyWords --aug --cuda > train_log/FiftyWords_with_aug.txt &
-nohup python train_resNet.py --run_tag Adiac --aug --cuda > train_log/Adiac_with_aug.txt &
-nohup python train_resNet.py --run_tag ArrowHead --aug --cuda > train_log/ArrowHead_with_aug.txt &
-nohup python train_resNet.py --run_tag Beef --aug --cuda > train_log/Beef_with_aug.txt &
-nohup python train_resNet.py --run_tag BeetleFly --aug --cuda > train_log/BeetleFly_with_aug.txt &
-nohup python train_resNet.py --run_tag BirdChicken --aug --cuda > train_log/BirdChicken_with_aug.txt &
-nohup python train_resNet.py --run_tag Car --aug --cuda > train_log/Car_with_aug.txt &
-nohup python train_resNet.py --run_tag CBF --aug --cuda > train_log/CBF_with_aug.txt &
-nohup python train_resNet.py --run_tag ChlorineConcentration --aug --cuda > train_log/ChlorineConcentration_with_aug.txt &
-nohup python train_resNet.py --run_tag CinCECGTorso --aug --cuda > train_log/CinCECGTorso_with_aug.txt &
-nohup python train_resNet.py --run_tag Coffee --aug --cuda > train_log/Coffee_with_aug.txt &
-nohup python train_resNet.py --run_tag Computers --aug --cuda > train_log/Computers_with_aug.txt &
-nohup python train_resNet.py --run_tag Cricket_X --aug --cuda > train_log/Cricket_X_with_aug.txt &
-nohup python train_resNet.py --run_tag Cricket_Y --aug --cuda > train_log/Cricket_Y_with_aug.txt &
-nohup python train_resNet.py --run_tag Cricket_Z --aug --cuda > train_log/Cricket_Z_with_aug.txt &
-nohup python train_resNet.py --run_tag DiatomSizeReduction --aug --cuda > train_log/DiatomSizeReduction_with_aug.txt &
-nohup python train_resNet.py --run_tag DistalPhalanxOutlineAgeGroup --aug --cuda > train_log/DistalPhalanxOutlineAgeGroup_with_aug.txt &
-nohup python train_resNet.py --run_tag DistalPhalanxOutlineCorrect --aug --cuda > train_log/DistalPhalanxOutlineCorrect_with_aug.txt &
-nohup python train_resNet.py --run_tag DistalPhalanxTW --aug --cuda > train_log/DistalPhalanxTW_with_aug.txt &
-nohup python train_resNet.py --run_tag Earthquakes --aug --cuda > train_log/Earthquakes_with_aug.txt &
-nohup python train_resNet.py --run_tag ECG200 --aug --cuda > train_log/ECG200_with_aug.txt &
-nohup python train_resNet.py --run_tag ECG5000 --aug --cuda > train_log/ECG5000_with_aug.txt &
-nohup python train_resNet.py --run_tag ECGFiveDays --aug --cuda > train_log/ECGFiveDays_with_aug.txt &
-nohup python train_resNet.py --run_tag ElectricDevices --aug --cuda > train_log/ElectricDevices_with_aug.txt &
-nohup python train_resNet.py --run_tag FaceAll --aug --cuda > train_log/FaceAll_with_aug.txt &
-nohup python train_resNet.py --run_tag FaceFour --aug --cuda > train_log/FaceFour_with_aug.txt &
-nohup python train_resNet.py --run_tag FacesUCR --aug --cuda > train_log/FacesUCR_with_aug.txt &
-nohup python train_resNet.py --run_tag Fish --aug --cuda > train_log/Fish_with_aug.txt &
-nohup python train_resNet.py --run_tag FordA --aug --cuda > train_log/FordA_with_aug.txt &
-nohup python train_resNet.py --run_tag FordB --aug --cuda > train_log/FordB_with_aug.txt &
-nohup python train_resNet.py --run_tag GunPoint --aug --cuda > train_log/GunPoint_with_aug.txt &
-nohup python train_resNet.py --run_tag Ham --aug --cuda > train_log/Ham_with_aug.txt &
-nohup python train_resNet.py --run_tag HandOutlines --aug --cuda > train_log/HandOutlines_with_aug.txt &
-nohup python train_resNet.py --run_tag Haptics --aug --cuda > train_log/Haptics_with_aug.txt &
-nohup python train_resNet.py --run_tag Herring --aug --cuda > train_log/Herring_with_aug.txt &
-nohup python train_resNet.py --run_tag InlineSkate --aug --cuda > train_log/InlineSkate_with_aug.txt &
-nohup python train_resNet.py --run_tag InsectWingbeatSound --aug --cuda > train_log/InsectWingbeatSound_with_aug.txt &
-nohup python train_resNet.py --run_tag ItalyPowerDemand --aug --cuda > train_log/ItalyPowerDemand_with_aug.txt &
-nohup python train_resNet.py --run_tag LargeKitchenAppliances --aug --cuda > train_log/LargeKitchenAppliances_with_aug.txt &
-nohup python train_resNet.py --run_tag Lighting2 --aug --cuda > train_log/Lighting2_with_aug.txt &
-nohup python train_resNet.py --run_tag Lighting7 --aug --cuda > train_log/Lighting7_with_aug.txt &
-nohup python train_resNet.py --run_tag Mallat --aug --cuda > train_log/Mallat_with_aug.txt &
-nohup python train_resNet.py --run_tag Meat --aug --cuda > train_log/Meat_with_aug.txt &
-nohup python train_resNet.py --run_tag MedicalImages --aug --cuda > train_log/MedicalImages_with_aug.txt &
-nohup python train_resNet.py --run_tag MiddlePhalanxOutlineAgeGroup --aug --cuda > train_log/MiddlePhalanxOutlineAgeGroup_with_aug.txt &
-nohup python train_resNet.py --run_tag MiddlePhalanxOutlineCorrect --aug --cuda > train_log/MiddlePhalanxOutlineCorrect_with_aug.txt &
-nohup python train_resNet.py --run_tag MiddlePhalanxTW --aug --cuda > train_log/MiddlePhalanxTW_with_aug.txt &
-nohup python train_resNet.py --run_tag MoteStrain --aug --cuda > train_log/MoteStrain_with_aug.txt &
-nohup python train_resNet.py --run_tag NonInvasiveFetalECGThorax1 --aug --cuda > train_log/NonInvasiveFetalECGThorax1_with_aug.txt &
-nohup python train_resNet.py --run_tag NonInvasiveFetalECGThorax2 --aug --cuda > train_log/NonInvasiveFetalECGThorax2_with_aug.txt &
-nohup python train_resNet.py --run_tag OliveOil --aug --cuda > train_log/OliveOil_with_aug.txt &
-nohup python train_resNet.py --run_tag OSULeaf --aug --cuda > train_log/OSULeaf_with_aug.txt &
-nohup python train_resNet.py --run_tag PhalangesOutlinesCorrect --aug --cuda > train_log/PhalangesOutlinesCorrect_with_aug.txt &
-nohup python train_resNet.py --run_tag Phoneme --aug --cuda > train_log/Phoneme_with_aug.txt &
-nohup python train_resNet.py --run_tag Plane --aug --cuda > train_log/Plane_with_aug.txt &
-nohup python train_resNet.py --run_tag ProximalPhalanxOutlineAgeGroup --aug --cuda > train_log/ProximalPhalanxOutlineAgeGroup_with_aug.txt &
-nohup python train_resNet.py --run_tag ProximalPhalanxOutlineCorrect --aug --cuda > train_log/ProximalPhalanxOutlineCorrect_with_aug.txt &
-nohup python train_resNet.py --run_tag ProximalPhalanxTW --aug --cuda > train_log/ProximalPhalanxTW_with_aug.txt &
-nohup python train_resNet.py --run_tag RefrigerationDevices --aug --cuda > train_log/RefrigerationDevices_with_aug.txt &
-nohup python train_resNet.py --run_tag ScreenType --aug --cuda > train_log/ScreenType_with_aug.txt &
-nohup python train_resNet.py --run_tag ShapeletSim --aug --cuda > train_log/ShapeletSim_with_aug.txt &
-nohup python train_resNet.py --run_tag ShapesAll --aug --cuda > train_log/ShapesAll_with_aug.txt &
-nohup python train_resNet.py --run_tag SmallKitchenAppliances --aug --cuda > train_log/SmallKitchenAppliances_with_aug.txt &
-nohup python train_resNet.py --run_tag SonyAIBORobotSurface --aug --cuda > train_log/SonyAIBORobotSurface_with_aug.txt &
-nohup python train_resNet.py --run_tag SonyAIBORobotSurfaceII --aug --cuda > train_log/SonyAIBORobotSurfaceII_with_aug.txt &
-nohup python train_resNet.py --run_tag StarLightCurves --aug --cuda > train_log/StarLightCurves_with_aug.txt &
-nohup python train_resNet.py --run_tag Strawberry --aug --cuda > train_log/Strawberry_with_aug.txt &
-nohup python train_resNet.py --run_tag SwedishLeaf --aug --cuda > train_log/SwedishLeaf_with_aug.txt &
-nohup python train_resNet.py --run_tag Symbols --aug --cuda > train_log/Symbols_with_aug.txt &
-nohup python train_resNet.py --run_tag SyntheticControl --aug --cuda > train_log/SyntheticControl_with_aug.txt &
-nohup python train_resNet.py --run_tag ToeSegmentation1 --aug --cuda > train_log/ToeSegmentation1_with_aug.txt &
-nohup python train_resNet.py --run_tag ToeSegmentation2 --aug --cuda > train_log/ToeSegmentation2_with_aug.txt &
-nohup python train_resNet.py --run_tag Trace --aug --cuda > train_log/Trace_with_aug.txt &
-nohup python train_resNet.py --run_tag TwoLeadECG --aug --cuda > train_log/TwoLeadECG_with_aug.txt &
-nohup python train_resNet.py --run_tag TwoPatterns --aug --cuda > train_log/TwoPatterns_with_aug.txt &
-nohup python train_resNet.py --run_tag UWaveGestureLibraryAll --aug --cuda > train_log/UWaveGestureLibraryAll_with_aug.txt &
-nohup python train_resNet.py --run_tag UWaveGestureLibrary_X --aug --cuda > train_log/UWaveGestureLibrary_X_with_aug.txt &
-nohup python train_resNet.py --run_tag UWaveGestureLibrary_Y --aug --cuda > train_log/UWaveGestureLibrary_Y_with_aug.txt &
-nohup python train_resNet.py --run_tag UWaveGestureLibrary_Z --aug --cuda > train_log/UWaveGestureLibrary_Z_with_aug.txt &
-nohup python train_resNet.py --run_tag Wafer --aug --cuda > train_log/Wafer_with_aug.txt &
-nohup python train_resNet.py --run_tag Wine --aug --cuda > train_log/Wine_with_aug.txt &
-nohup python train_resNet.py --run_tag WordsSynonyms --aug --cuda > train_log/WordsSynonyms_with_aug.txt &
-nohup python train_resNet.py --run_tag Worms --aug --cuda > train_log/Worms_with_aug.txt &
-nohup python train_resNet.py --run_tag WormsTwoClass --aug --cuda > train_log/WormsTwoClass_with_aug.txt &
-nohup python train_resNet.py --run_tag Yoga --aug --cuda > train_log/Yoga_with_aug.txt &
+nohup python -u train_resNet.py --run_tag FiftyWords --cuda --aug --model r --n_group 4 > log/r4_FiftyWords.txt &
+nohup python -u train_resNet.py --run_tag Adiac --cuda --aug --model r --n_group 6 > log/r4_Adiac.txt &
+nohup python -u train_resNet.py --run_tag ArrowHead --cuda --aug --model r --n_group 8 > log/r4_ArrowHead.txt &
+nohup python -u train_resNet.py --run_tag Beef --cuda --aug --model r --n_group 4 > log/r4_Beef.txt &
+nohup python -u train_resNet.py --run_tag BeetleFly --cuda --aug --model r --n_group 4 > log/r4_BeetleFly.txt &
+nohup python -u train_resNet.py --run_tag BirdChicken --cuda --aug --model r --n_group 4 > log/r4_BirdChicken.txt &
+nohup python -u train_resNet.py --run_tag Car --cuda --aug --model r --n_group 4 > log/r4_Car.txt &
+nohup python -u train_resNet.py --run_tag CBF --cuda --aug --model r --n_group 2 > log/r4_CBF.txt &
+nohup python -u train_resNet.py --run_tag ChlorineConcentration --cuda --aug --model r --n_group 4 > log/r4_ChlorineConcentration.txt &
+nohup python -u train_resNet.py --run_tag CinCECGTorso --cuda --aug --model r --n_group 4 > log/r4_CinCECGTorso.txt &
+nohup python -u train_resNet.py --run_tag Coffee --cuda --aug --model r --n_group 4 > log/r4_Coffee.txt &
+nohup python -u train_resNet.py --run_tag Computers --cuda --aug --model r --n_group 2 > log/r4_Computers.txt &
+nohup python -u train_resNet.py --run_tag CricketX --cuda --aug --model r --n_group 2 > log/r4_CricketX.txt &
+nohup python -u train_resNet.py --run_tag CricketY --cuda --aug --model r --n_group 2 > log/r4_CricketY.txt &
+nohup python -u train_resNet.py --run_tag CricketZ --cuda --aug --model r --n_group 2 > log/r4_CricketZ.txt &
+nohup python -u train_resNet.py --run_tag DiatomSizeReduction --cuda --aug --model r --n_group 4 > log/r4_DiatomSizeReduction.txt &
+nohup python -u train_resNet.py --run_tag DistalPhalanxOutlineAgeGroup --cuda --aug --model r --n_group 4 > log/r4_DistalPhalanxOutlineAgeGroup.txt &
+nohup python -u train_resNet.py --run_tag DistalPhalanxOutlineCorrect --cuda --aug --model r --n_group 4 > log/r4_DistalPhalanxOutlineCorrect.txt &
+nohup python -u train_resNet.py --run_tag DistalPhalanxTW --cuda --aug --model r --n_group 4 > log/r4_DistalPhalanxTW.txt &
+nohup python -u train_resNet.py --run_tag Earthquakes --cuda --aug --model r --n_group 2 > log/r4_Earthquakes.txt &
+nohup python -u train_resNet.py --run_tag ECG200 --cuda --aug --model r --n_group 4 > log/r4_ECG200.txt &
+nohup python -u train_resNet.py --run_tag ECG5000 --cuda --aug --model r --n_group 4 > log/r4_ECG5000.txt &
+nohup python -u train_resNet.py --run_tag ECGFiveDays --cuda --aug --model r --n_group 4 > log/r4_ECGFiveDays.txt &
+
+nohup python -u train_resNet.py --run_tag ElectricDevices --cuda --aug --model r --n_group 4 > log/r4_ElectricDevices.txt &
+
+nohup python -u train_resNet.py --run_tag FaceAll --cuda --aug --model r --n_group 2 > log/r4_FaceAll.txt &
+nohup python -u train_resNet.py --run_tag FaceFour --cuda --aug --model r --n_group 2 > log/r4_FaceFour.txt &
+nohup python -u train_resNet.py --run_tag FacesUCR --cuda --aug --model r --n_group 2 > log/r4_FacesUCR.txt &
+nohup python -u train_resNet.py --run_tag Fish --cuda --aug --model r --n_group 4 > log/r4_Fish.txt &
+nohup python -u train_resNet.py --run_tag FordA --cuda --aug --model r --n_group 4 > log/r4_FordA.txt &
+nohup python -u train_resNet.py --run_tag FordB --cuda --aug --model r --n_group 4 > log/r4_FordB.txt &
+nohup python -u train_resNet.py --run_tag GunPoint --cuda --aug --model r --n_group 4 > log/r4_GunPoint.txt &
+nohup python -u train_resNet.py --run_tag Ham --cuda --aug --model r --n_group 4 > log/r4_Ham.txt &
+
+nohup python -u train_resNet.py --run_tag HandOutlines --cuda --aug --model r --n_group 4 > log/r4_HandOutlines.txt &
+
+nohup python -u train_resNet.py --run_tag Haptics --cuda --aug --model r --n_group 2 > log/r4_Haptics.txt &
+nohup python -u train_resNet.py --run_tag Herring --cuda --aug --model r --n_group 2 > log/r4_Herring.txt &
+nohup python -u train_resNet.py --run_tag InlineSkate --cuda --aug --model r --n_group 4 > log/r4_InlineSkate.txt &
+nohup python -u train_resNet.py --run_tag InsectWingbeatSound --cuda --aug --model r --n_group 4 > log/r4_InsectWingbeatSound.txt &
+nohup python -u train_resNet.py --run_tag ItalyPowerDemand --cuda --aug --model r --n_group 4 > log/r4_ItalyPowerDemand.txt &
+nohup python -u train_resNet.py --run_tag LargeKitchenAppliances --cuda --aug --model r --n_group 4 > log/r4_LargeKitchenAppliances.txt &
+nohup python -u train_resNet.py --run_tag Lightning2 --cuda --aug --model r --n_group 2 > log/r4_Lightning2.txt &
+nohup python -u train_resNet.py --run_tag Lightning7 --cuda --aug --model r --n_group 2 > log/r4_Lightning7.txt &
+nohup python -u train_resNet.py --run_tag Mallat --cuda --aug --model r --n_group 4 > log/r4_Mallat.txt &
+nohup python -u train_resNet.py --run_tag Meat --cuda --aug --model r --n_group 4 > log/r4_Meat.txt &
+nohup python -u train_resNet.py --run_tag MedicalImages --cuda --aug --model r --n_group 4 > log/r4_MedicalImages.txt &
+nohup python -u train_resNet.py --run_tag MiddlePhalanxOutlineAgeGroup --cuda --aug --model r --n_group 4 > log/r4_MiddlePhalanxOutlineAgeGroup.txt &
+nohup python -u train_resNet.py --run_tag MiddlePhalanxOutlineCorrect --cuda --aug --model r --n_group 4 > log/r4_MiddlePhalanxOutlineCorrect.txt &
+nohup python -u train_resNet.py --run_tag MiddlePhalanxTW --cuda --aug --model r --n_group 4 > log/r4_MiddlePhalanxTW.txt &
+nohup python -u train_resNet.py --run_tag MoteStrain --cuda --aug --model r --n_group 2 > log/r4_MoteStrain.txt &
+
+
+nohup python -u train_resNet.py --run_tag NonInvasiveFetalECGThorax1 --cuda --aug --model r --n_group 4 > log/r4_NonInvasiveFetalECGThorax1.txt &
+nohup python -u train_resNet.py --run_tag NonInvasiveFetalECGThorax2 --cuda --aug --model r --n_group 4 > log/r4_NonInvasiveFetalECGThorax2.txt &
+nohup python -u train_resNet.py --run_tag OliveOil --cuda --aug --model r --n_group 8 > log/r4_OliveOil.txt &
+nohup python -u train_resNet.py --run_tag OSULeaf --cuda --aug --model r --n_group 4 > log/r4_OSULeaf.txt &
+nohup python -u train_resNet.py --run_tag PhalangesOutlinesCorrect --cuda --aug --model r --n_group 4 > log/r4_PhalangesOutlinesCorrect.txt &
+nohup python -u train_resNet.py --run_tag Phoneme --cuda --aug --model r --runs 1 --n_group 4 > log/r4_Phoneme.txt &
+nohup python -u train_resNet.py --run_tag Plane --cuda --aug --model r --n_group 4 > log/r4_Plane.txt &
+nohup python -u train_resNet.py --run_tag ProximalPhalanxOutlineAgeGroup --cuda --aug --model r --n_group 4 > log/r4_ProximalPhalanxOutlineAgeGroup.txt &
+nohup python -u train_resNet.py --run_tag ProximalPhalanxOutlineCorrect --cuda --aug --model r --n_group 4 > log/r4_ProximalPhalanxOutlineCorrect.txt &
+nohup python -u train_resNet.py --run_tag ProximalPhalanxTW --cuda --aug --model r --n_group 4 > log/r4_ProximalPhalanxTW.txt &
+nohup python -u train_resNet.py --run_tag RefrigerationDevices --cuda --aug --model r --n_group 2 > log/r2_RefrigerationDevices.txt &
+nohup python -u train_resNet.py --run_tag ScreenType --cuda --aug --model r --n_group 4 > log/r4_ScreenType.txt &
+
+nohup python -u train_resNet.py --run_tag ShapeletSim --cuda --aug --model r --n_group 2 > log/r4_ShapeletSim.txt &
+nohup python -u train_resNet.py --run_tag ShapesAll --cuda --aug --model r --n_group 4 > log/r4_ShapesAll.txt &
+nohup python -u train_resNet.py --run_tag SmallKitchenAppliances --cuda --aug --model r --n_group 2 > log/r4_SmallKitchenAppliances.txt &
+nohup python -u train_resNet.py --run_tag SonyAIBORobotSurface1 --cuda --aug --model r --n_group 4 > log/r4_SonyAIBORobotSurface1.txt &
+nohup python -u train_resNet.py --run_tag SonyAIBORobotSurface2 --cuda --aug --model r --n_group 4 > log/r4_SonyAIBORobotSurface2.txt &
+nohup python -u train_resNet.py --run_tag StarLightCurves --cuda --aug --model r --n_group 4 > log/r4_StarLightCurves.txt &
+nohup python -u train_resNet.py --run_tag Strawberry --cuda --aug --model r --n_group 4 > log/r4_Strawberry.txt &
+nohup python -u train_resNet.py --run_tag SwedishLeaf --cuda --aug --model r --n_group 4 > log/r4_SwedishLeaf.txt &
+nohup python -u train_resNet.py --run_tag Symbols --cuda --aug --model r --n_group 4 > log/r4_Symbols.txt &
+nohup python -u train_resNet.py --run_tag SyntheticControl --cuda --aug --model r --n_group 4 > log/r4_SyntheticControl.txt &
+nohup python -u train_resNet.py --run_tag ToeSegmentation1 --cuda --aug --model r --n_group 4 > log/r4_ToeSegmentation1.txt &
+nohup python -u train_resNet.py --run_tag ToeSegmentation2 --cuda --aug --model r --n_group 4 > log/r4_ToeSegmentation2.txt &
+nohup python -u train_resNet.py --run_tag Trace --cuda --aug --model r --n_group 4 > log/r4_Trace.txt &
+nohup python -u train_resNet.py --run_tag TwoLeadECG --cuda --aug --model r --n_group 4 > log/r4_TwoLeadECG.txt &
+nohup python -u train_resNet.py --run_tag TwoPatterns --cuda --aug --model r --n_group 4 > log/r4_TwoPatterns.txt &
+nohup python -u train_resNet.py --run_tag UWaveGestureLibraryAll --cuda --aug --model r --n_group 4 > log/r4_UWaveGestureLibraryAll.txt &
+nohup python -u train_resNet.py --run_tag UWaveGestureLibraryX --cuda --aug --model r --n_group 4 > log/r4_UWaveGestureLibraryX.txt &
+nohup python -u train_resNet.py --run_tag UWaveGestureLibraryY --cuda --aug --model r --n_group 4 > log/r4_UWaveGestureLibraryY.txt &
+nohup python -u train_resNet.py --run_tag UWaveGestureLibraryZ --cuda --aug --model r --n_group 4 > log/r4_UWaveGestureLibraryZ.txt &
+nohup python -u train_resNet.py --run_tag Wafer --cuda --aug --model r --n_group 4 > log/r4_Wafer.txt &
+nohup python -u train_resNet.py --run_tag Wine --cuda --aug --model r --n_group 100 > log/r100_Wine.txt &
+nohup python -u train_resNet.py --run_tag WordSynonyms --cuda --aug --model r --n_group 4 > log/r4_WordSynonyms.txt &
+nohup python -u train_resNet.py --run_tag Worms --cuda --aug --model r --n_group 4 > log/r4_Worms.txt &
+nohup python -u train_resNet.py --run_tag WormsTwoClass --cuda --aug --model r --n_group 4 > log/r4_WormsTwoClass.txt &
+nohup python -u train_resNet.py --run_tag Yoga --cuda --aug --model r --n_group 4 > log/r4_Yoga.txt &

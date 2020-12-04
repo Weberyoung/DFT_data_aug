@@ -20,8 +20,7 @@ class ResNet(nn.Module):
         for block in self.blocks:
             x = block(x)
 
-        x = F.adaptive_avg_pool2d(x, 1)
-
+        x = F.adaptive_avg_pool2d(x, (1, 1))
         x = x.view(-1, 1, 128)
         x = self.fc1(x)
         # x = F.log_softmax(x,1)
@@ -78,7 +77,7 @@ class ConvNet(nn.Module):
         x = F.relu(self.bn1(self.conv1(x)))
         x = F.relu(self.bn2(self.conv2(x)))
         x = F.relu(self.bn3(self.conv3(x)))
-        x = F.adaptive_avg_pool2d(x, 1)
+        x = F.adaptive_avg_pool2d(x, (1, 1))
         x = x.view(-1, 128)
         x = self.fc4(x)
         # return F.log_softmax(x,1)

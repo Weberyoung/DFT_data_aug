@@ -4,7 +4,7 @@ import numpy as np
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    path = '85_UCRArchive/Car/Car_TRAIN.tsv'
+    path = 'UCRArchive_2018/Car/Car_TRAIN.tsv'
     data, n_class = load_ucr(path)
     print(data.shape)
     stratified_data = stratify_by_label(data)
