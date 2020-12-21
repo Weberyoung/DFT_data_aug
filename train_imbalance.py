@@ -2,7 +2,7 @@ from models import ResNet, ConvNet
 import torch.nn as nn
 import argparse
 from utils import UcrDataset, UCR_dataloader, load_ucr, stratify_by_label
-from dft_aug import data_aug_by_dft
+from imbanlance import data_aug_by_dft
 import torch.optim as optim
 import torch.utils.data
 from sklearn.metrics import accuracy_score
@@ -13,11 +13,10 @@ import pandas as pd
 import os
 import random
 import numpy as np
-from constants import HARD
+from constants import IMBA
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument('--aug', action='store_true', help='')
 parser.add_argument('--gpu', type=str, default='0', help='the index of test sample ')
 parser.add_argument('--channel_last', type=bool, default=True, help='the channel of data is last or not')
 parser.add_argument('--runs', type=int, default=3, help='the runs to calculate accuracy')
@@ -39,17 +38,10 @@ if torch.cuda.is_available():
     print("You have a cuda device, so you might want to run with --cuda as option")
 
 device = torch.device("cuda:0" if opt.cuda else "cpu")
-
-# all_reprot_metrics = pd.DataFrame(data=np.zeros((1, 4), dtype=np.float), index=[0],
-#                                   columns=['acc_mean', 'acc_std', 'F1_mean', 'F1_std'])
-# all_reprot_metrics = all_reprot_metrics.drop(index=[0])
-if opt.aug:
-    dir = 'report_metrics/%s_aug_%s' % (opt.model, str(opt.n_group))
-else:
-    dir = 'report_metrics/%s' % opt.model
+dir = 'report_metrics/%s_aug_%s_IMBA' % (opt.model, str(opt.n_group))
 
 
-def train(name, data_aug=opt.aug):
+def train(name):
     record = pd.DataFrame(data=np.zeros((1, 4), dtype=np.float),
                           columns=['precision', 'accuracy', 'recall', 'F1'])
     for _ in range(opt.runs):
@@ -61,28 +53,20 @@ def train(name, data_aug=opt.aug):
         os.makedirs(opt.checkpoints_folder, exist_ok=True)
         os.makedirs('%s/%s' % (opt.checkpoints_folder, name), exist_ok=True)
         os.makedirs('report_metrics', exist_ok=True)
-        if opt.aug:
-            root_dir = 'report_metrics/%s_aug_%s/%s' % (opt.model, str(opt.n_group), name)
-            os.makedirs(root_dir, exist_ok=True)
 
-        else:
-            root_dir = 'report_metrics/%s/%s' % (opt.model, name)
-            os.makedirs(root_dir, exist_ok=True)
+        root_dir = 'report_metrics/%s_aug_%s_IMBA/%s' % (opt.model, str(opt.n_group), name)
+        os.makedirs(root_dir, exist_ok=True)
 
         # 加载数据集
         path = 'UCRArchive_2018/' + name + '/' + name + '_TRAIN.tsv'
         train_set, n_class = load_ucr(path)
-        train_size = len(train_set)
 
-        if data_aug:
-            print('启用数据增强！')
-            stratified_train_set = stratify_by_label(train_set)
-            data_aug_set = data_aug_by_dft(stratified_train_set, opt.n_group, train_size)
-            total_set = np.concatenate((train_set, data_aug_set))
-            print('Shape of total set', total_set.shape)
-            dataset = UcrDataset(total_set, channel_last=opt.channel_last)
-        else:
-            dataset = UcrDataset(train_set, channel_last=opt.channel_last)
+        print('启用平衡数据增强！')
+        stratified_train_set = stratify_by_label(train_set)
+        data_aug_set = data_aug_by_dft(stratified_train_set, opt.n_group)
+        total_set = np.concatenate((train_set, data_aug_set))
+        print('Shape of total set', total_set.shape)
+        dataset = UcrDataset(total_set, channel_last=opt.channel_last)
 
         batch_size = int(min(len(dataset) / 10, 16))
         dataloader = UCR_dataloader(dataset, batch_size)
@@ -119,8 +103,9 @@ def train(name, data_aug=opt.aug):
                 min_loss = loss
                 # End of the epoch,save model
                 print('MinLoss: %.10f Saving the best epoch model.....' % min_loss)
-                torch.save(net, '%s/%s/%s_%s_best.pth' % (opt.checkpoints_folder, name, opt.model, str(opt.n_group)))
-        net_path = '%s/%s/%s_%s_best.pth' % (opt.checkpoints_folder, name, opt.model, str(opt.n_group))
+                torch.save(net,
+                           '%s/%s/%s_%s_best_IMBA.pth' % (opt.checkpoints_folder, name, opt.model, str(opt.n_group)))
+        net_path = '%s/%s/%s_%s_best_IMBA.pth' % (opt.checkpoints_folder, name, opt.model, str(opt.n_group))
         one_record = eval_accuracy(net_path, name)
         print('The minimum loss is %.8f' % min_loss)
         record = record.append(one_record, ignore_index=True)
@@ -180,7 +165,7 @@ def eval_accuracy(net_path, name):
 
 if __name__ == '__main__':
     if opt.run_tag == 'all':
-        for n in HARD:
+        for n in IMBA:
             print('Now training: %s' % n)
             train(name=n)
 

@@ -2,7 +2,7 @@ from models import ResNet, ConvNet
 import torch.nn as nn
 import argparse
 from utils import UcrDataset, UCR_dataloader, load_ucr, stratify_by_label
-from dft_aug import data_aug_by_dft
+from DFT_All_Group import data_aug_by_dft
 import torch.optim as optim
 import torch.utils.data
 from sklearn.metrics import accuracy_score
@@ -13,7 +13,7 @@ import pandas as pd
 import os
 import random
 import numpy as np
-from constants import HARD
+from constants import SMALL
 
 parser = argparse.ArgumentParser()
 
@@ -27,7 +27,7 @@ parser.add_argument('--cuda', action='store_true', help='enables cuda')
 parser.add_argument('--checkpoints_folder', default='model_checkpoints', help='folder to save checkpoints')
 parser.add_argument('--run_tag', default='ECG200', help='tags for the current run')
 parser.add_argument('--model', default='r', help='the model type(ResNet,FCN)')
-parser.add_argument('--n_group', type=int, default=4, help='the number of group')
+parser.add_argument('--n_group', type=int, default=100, help='the number of group')
 parser.add_argument('--flag', type=int, help='the number of group')
 
 opt = parser.parse_args()
@@ -180,7 +180,7 @@ def eval_accuracy(net_path, name):
 
 if __name__ == '__main__':
     if opt.run_tag == 'all':
-        for n in HARD:
+        for n in SMALL:
             print('Now training: %s' % n)
             train(name=n)
 

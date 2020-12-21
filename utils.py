@@ -18,7 +18,7 @@ def load_ucr(path):
 
 
 class UcrDataset(Dataset):
-    def __init__(self, data, channel_last=True):
+    def __init__(self, data,channel_last=True):
         '''
          实现初始化方法，在初始化的时候将数据读载入
         :param data_path: 文件路径
@@ -28,6 +28,7 @@ class UcrDataset(Dataset):
         self.channel_last = channel_last
         if self.channel_last:
             self.data = np.reshape(self.data, [self.data.shape[0], self.data.shape[1], 1])
+
         else:
             self.data = np.reshape(self.data, [self.data.shape[0], 1, self.data.shape[1]])
 
@@ -45,7 +46,9 @@ class UcrDataset(Dataset):
         if not self.channel_last:
             return self.data[idx, :, 1:], self.data[idx, :, 0]
         else:
+
             return self.data[idx, 1:, :], self.data[idx, 0, :]
+
 
     def get_seq_len(self):
         if self.channel_last:
@@ -88,7 +91,8 @@ def stratify_by_label(dataset):
 if __name__ == '__main__':
     data, n_class = load_ucr('UCRArchive_2018/ECG200/ECG200_TRAIN.tsv')
     print(len(data))
-    # stratified_data, n_class = stratify_by_label(data)
+    stratified_data = stratify_by_label(data)
+    # stratified_data = np.concatenate(stratified_data)
+    print(type(stratified_data))
     # assert (stratified_data.shape[0] == n_class)
-    # for i in range(n_class):
-    #     print(stratified_data[i])
+    print(stratified_data.shape)
